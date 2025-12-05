@@ -1,6 +1,8 @@
 #include "stm32f10x.h"                  // Device header
 #include "Delay.h"
 #include "OLED.h"
+#include "HCSRO4.h"
+
 
 /**
   * 坐标轴定义：
@@ -23,12 +25,20 @@
   * 
   */
 
+uint16_t distance;
+
 int main(void)
 {
 	OLED_Init();
+	HCSRO4_Init();
 	
 	while (1)
 	{
-	
+		distance = HCSRO4_GetValue();
+		
+		OLED_Clear();
+		OLED_ShowNum(0,0,distance,3,OLED_8X16);
+		OLED_Update();
+		
 	}
 }
