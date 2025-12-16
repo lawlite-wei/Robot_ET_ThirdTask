@@ -16,7 +16,7 @@ void Key_Init(void)
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 	
@@ -26,7 +26,7 @@ uint8_t Key_GetState(uint8_t n)
 {
 	if (n == KEY_3)
 	{
-		if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_15) == 0)
+		if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_14) == 0)
 		{
 			return KEY_PRESSED;
 		}

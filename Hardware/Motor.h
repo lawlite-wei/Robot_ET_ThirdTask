@@ -4,6 +4,6 @@
 void Motor_Init();
 void Motor1_SetPWM(int8_t PWM);
 void Motor2_SetPWM(int8_t PWM);
-
+void Motor_right(int8_t PWM);
 
 #endif
