@@ -8,7 +8,7 @@ void PWM_Init(void)
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_0 | GPIO_Pin_1;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	
@@ -28,7 +28,7 @@ void PWM_Init(void)
 //	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 //	TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE);
 	
-	//配置CH2
+	//配置CH4
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 	TIM_OCStructInit(&TIM_OCInitStructure);
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
@@ -42,6 +42,14 @@ void PWM_Init(void)
 	TIM_OCInitStructure.TIM_Pulse = 0;
 	TIM_OC3Init(TIM2, &TIM_OCInitStructure);
 	
+	//配置CH1
+	TIM_OCInitStructure.TIM_Pulse = 0;
+	TIM_OC1Init(TIM2, &TIM_OCInitStructure);
+	
+	//配置CH2
+	TIM_OCInitStructure.TIM_Pulse = 0;
+	TIM_OC2Init(TIM2, &TIM_OCInitStructure);
+	
 	//启动定时器
 	TIM_Cmd(TIM2,ENABLE);
 }
@@ -54,4 +62,14 @@ void PWM_SetCompare3(uint16_t Compare)
 void PWM_SetCompare4(uint16_t Compare)
 {
 	TIM_SetCompare4(TIM2, Compare);
+}
+
+void PWM_SetCompare1(uint16_t Compare)
+{
+	TIM_SetCompare1(TIM2, Compare);
+}
+
+void PWM_SetCompare2(uint16_t Compare)
+{
+	TIM_SetCompare2(TIM2, Compare);
 }

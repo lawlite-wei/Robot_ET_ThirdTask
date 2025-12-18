@@ -8,5 +8,5 @@ void Servo_Init(void)
 
 void Servo_SetAngle(float Angle)
 {
-	PWM_SetCompare2(Angle / 180 * 2000 + 500);
+	Servo_Angle(Angle / 180 * 2000 + 500);
 }

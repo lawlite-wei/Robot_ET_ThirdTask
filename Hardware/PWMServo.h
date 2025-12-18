@@ -2,6 +2,6 @@
 #define __PWMSERVO_H
 
 void PWMServo_Init(void);
-void PWM_SetCompare2(uint16_t Compare);
+void Servo_Angle(uint16_t Compare);
 
 #endif

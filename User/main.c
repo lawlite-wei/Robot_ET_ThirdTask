@@ -1,13 +1,16 @@
 #include "stm32f10x.h"                  // Device header
 #include "Delay.h"
-#include "OLED.h"
+#include "LED.h"
 #include "HCSRO4.h"
 #include "PWM.h"
 #include "Motor.h"
-#include "PWM2.h"
-#include "Motor2.h"
 #include "Key.h"
 #include "Timer.h"
+#include "Servo.h"
+#include "PWMServo.h"
+#include "TCS34725_IIC.h"
+#include "TCS34725.h"
+#include "OA.h"
 
 /**
   * 坐标轴定义：
@@ -30,29 +33,20 @@
   * 
   */
 
-uint16_t distance;
 uint8_t Startflag = 0;
 
 int main(void)
 {
-	OLED_Init();
 	Key_Init();
+	LED_Init();
+	Servo_Init();
 	HCSRO4_Init();
 	Timer_Init();
 	PWM_Init();
 	Motor_Init();
-	PWM2_Init();
-	Motor2_Init();
-	
 	
 	while (1)
 	{
-//		distance = HCSRO4_GetValue();
-//		
-//		OLED_Clear();
-//		OLED_ShowNum(0,0,distance,3,OLED_8X16);
-//		OLED_Update();
-		
 		
 		if(Key_Check(KEY_3,KEY_DOWN ))
 		{
@@ -61,13 +55,12 @@ int main(void)
 		
 		if(Startflag == 1)
 		{
-			Motor_right(70);
-			Motor_left(70);
+			OA_Control();
 		}
 		else
 		{
-			Motor_right(0);
 			Motor_left(0);
+			Motor_right(0);
 		}
 	}
 }
@@ -77,6 +70,7 @@ void TIM1_UP_IRQHandler(void)
 	if (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET)
 	{
 		Key_Tick();
+		
 		TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
 	}
 }
