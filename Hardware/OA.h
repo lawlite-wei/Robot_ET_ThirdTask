@@ -1,10 +1,14 @@
 #ifndef __OA_H
 #define __OA_H
 
-extern RGB rgb;
-extern float Yaw;
+#include "TCS34725.h"
 
-void OA_Control(void);
+extern RGB rgb;
+extern uint16_t distance_M;
+extern uint16_t distance_R;
+extern uint16_t distance_L;
+extern uint8_t turning_flag;  // 添加转向标志
+
 void HCSRO4_getData(void);
 void LED_Control(void);
 
